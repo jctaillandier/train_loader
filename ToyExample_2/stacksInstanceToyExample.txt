@@ -1,0 +1,9 @@
+contInit	contNumb	contLotIdent	coordLotX	coordLotY	contStackIndex	contStackHeigth	contDepth
+ZCSU	862525	H62	2	4	0	2	0
+ZCSU	652689	H62	2	4	0	2	1
+FSCU	825203	H62	2	5	1	1	0
+TCNU	683500	H62	2	6	2	2	0
+TCNU	429743	H62	2	6	2	2	1
+ZCSU	864725	H62	2	7	3	3	0
+ABCD	123000	H62	2	7	3	3	2
+ABCD	456000	H62	2	7	3	3	1
