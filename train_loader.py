@@ -16,22 +16,6 @@ import sys
 
 
 
-# ## Importing Data
-
-# <p> Here we have the variable 'dataset' which is set to a keyword. Changing this variable will allow to change the loading of the data. You can change the variable for </p>
-# <ul>
-#     <li> 'toy' </li>
-#     <li> 'toy_2' </li>
-#     <li>'small'</li>
-#     <li>'medium'</li>
-#     <li>'large'</li>
-# </ul>
-# <p>Other datasets would have to be loaded by changing the paths in the else statement. </p>
-
-# In[136]:
-
-
-
 ######################################################################################################
     # Here you can change the dataset_type for : small, medium, large, toy, toy_2, custom (as a string)
 dataset='toy'
@@ -171,9 +155,6 @@ load_plan.drop('contNumb', axis=1, inplace=True)
 
 # ### Stacks data structure
 
-# In[139]:
-
-
 # Again I concatenate the container ID into one column, to be able to locate it uniquely across datasets 
 stacks['cont_id'] = stacks["contInit"]+ ' ' + stacks["contNumb"].map(str)
 stacks.drop('contInit', axis=1, inplace=True)
@@ -181,8 +162,6 @@ stacks.drop('contNumb', axis=1, inplace=True)
 stacks.drop('coordLotX', axis=1, inplace=True)
 stacks.drop('coordLotY', axis=1, inplace=True)
 
-
-# In[140]:
 
 
 np_stacks = stacks.values
@@ -212,9 +191,6 @@ elif nbr_lots == 3:
 
 # ## Creation of container objects
 
-# In[141]:
-
-
 # Some information were put together to create containers:
 # First the container Id is concatenation of Container init + number
 class container():
@@ -240,9 +216,6 @@ class container():
 
 # ### Creating container lists
 
-# In[142]:
-
-
 #Create a list of all containers to be loaded USING STACK INSTANCE
 T = []
 #print(stacks.shape[0])
@@ -264,9 +237,6 @@ full_list = np.copy(cont_list)
 
 # ### Functions to help locate containers using ID
 
-# In[143]:
-
-
 # with a string of container id, finds the container object
 def find_cont_by_id(cont_id_str):
     for i, cont in enumerate(cont_list):
@@ -284,11 +254,6 @@ def get_train_loc_by_id(cont_id):
     location = 'Car number: '+ str(carInit) + '-' + str(carNumb)+', platform ' + str(platfSequIndex) + '-' +str(platfIdent)
     return location
 
-#get_train_loc_by_id('ZCSU 652689')
-
-
-# In[144]:
-
 
 # Setting the initial node, where state is given by problem's instance
 
@@ -303,9 +268,6 @@ state_0 = initial_state
 
 
 # ### Transition function, returning new state X
-
-# In[145]:
-
 
 # This function finds the coordinate of the container along the x axis of the stack
 #     It corresponds to its index in our 'state' list
@@ -342,9 +304,6 @@ def trans_fct(current_state, action_cont):
 
 # ### Cost Function (returns 1 or 2)
 
-# In[146]:
-
-
 # Cost function g(x,u) takes in state and move, returns the cost
 #    which will depend on whether cont can be placed directly on train or no
 def cost_g(state, container):
@@ -379,10 +338,6 @@ def cost_g(state, container):
 
 # ###  Finding the maximum amount of states given initial state
 
-# In[147]:
-
-
-
 def max_possible_states(state_0):
     adj_state_0 = []
     for i in range(len(state_0)):
@@ -396,9 +351,6 @@ def max_possible_states(state_0):
 
 
 # ### Returns possible moves given a state X_k
-
-# In[148]:
-
 
 # This function will return a list of all containers currently at the top of their stacks.
 def possible_moves(state):
@@ -420,11 +372,6 @@ def possible_moves(state):
         
     return possible_moves
 #possible_moves(state_0)
-
-
-# # Exact Method
-
-# In[149]:
 
 
 
@@ -578,10 +525,6 @@ class Container_solver():
 
 
 # # Heuristic 1
-
-# In[150]:
-
-
 
 class Container_solver_heuristic():
     
@@ -757,17 +700,8 @@ class Container_solver_heuristic():
 #heuristic_solver.solve()
 
 
-# In[ ]:
-
-
-
-
 
 # ## Heuristic 2 
-
-# In[151]:
-
-
 
 class Container_solver_heuristic2():
     def __init__(self, initial_state):
@@ -947,9 +881,6 @@ class Container_solver_heuristic2():
 
 # ## Routine to export instruction as .txt file 
 
-# In[152]:
-
-
 # This takes control of any output and writes to a file instead of the console here
 def export_states(solver):
     orig_stdout = sys.stdout
@@ -987,10 +918,6 @@ def export_moves(solver):
 #export_output(heuristic_solver_2)
 #export_moves(heuristic_solver_2)
 
-
-
-
-# In[154]:
 
 
 def run_algorithms(algo='exact'):
